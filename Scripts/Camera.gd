@@ -9,6 +9,8 @@ func _ready():
 func _input(event):
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		pivot.rotate_y(deg_to_rad(-event.relative.x * mouse_sense))
+		rotate_x(deg_to_rad(-event.relative.y * mouse_sense))
+		rotation_degrees.x = clamp(rotation_degrees.x, -60, 60)
 	
 	if event.is_action_pressed("esc"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:

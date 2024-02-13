@@ -1,22 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://er2pby0vu5bj"]
+[gd_scene load_steps=10 format=3 uid="uid://er2pby0vu5bj"]
 
 [ext_resource type="PackedScene" uid="uid://dno7402fckmxy" path="res://Characters/player.tscn" id="1_eoneh"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kq78h"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_50k6k"]
-sky_material = SubResource("ProceduralSkyMaterial_kq78h")
-
-[sub_resource type="Environment" id="Environment_qrmog"]
-background_mode = 2
-sky = SubResource("Sky_50k6k")
-tonemap_mode = 2
-glow_enabled = true
+[ext_resource type="Texture2D" uid="uid://5ubfjn37uri" path="res://icon.svg" id="1_riku4"]
+[ext_resource type="Script" path="res://Scripts/DayNigthCicle.gd" id="3_4rwn6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gjnoo"]
 albedo_color = Color(0.290196, 0.835294, 0.403922, 1)
+albedo_texture = ExtResource("1_riku4")
+uv1_triplanar = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_20ykp"]
 material = SubResource("StandardMaterial3D_gjnoo")
@@ -25,14 +16,22 @@ size = Vector2(10, 10)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_oqtgs"]
 data = PackedVector3Array(5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, 5, -5, 0, -5, 5, 0, -5)
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ng3ni"]
+sky_top_color = Color(0.211765, 0.513726, 0.913725, 1)
+sky_horizon_color = Color(0.588235, 0.858824, 0.976471, 1)
+ground_bottom_color = Color(0.211765, 0.513726, 0.913725, 1)
+ground_horizon_color = Color(0.588235, 0.858824, 0.976471, 1)
+
+[sub_resource type="Sky" id="Sky_pvydb"]
+sky_material = SubResource("ProceduralSkyMaterial_ng3ni")
+
+[sub_resource type="Environment" id="Environment_03tnw"]
+background_mode = 2
+sky = SubResource("Sky_pvydb")
+tonemap_mode = 2
+glow_enabled = true
+
 [node name="Level" type="Node3D"]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_qrmog")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-shadow_enabled = true
 
 [node name="Plane" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_20ykp")
@@ -44,3 +43,21 @@ shape = SubResource("ConcavePolygonShape3D_oqtgs")
 
 [node name="Player" parent="." instance=ExtResource("1_eoneh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.37366, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.973964, 0.226702, 0, -0.226702, 0.973964, 0, 2.123, 2.67221)
+
+[node name="DayNigthCicle" type="Node3D" parent="."]
+script = ExtResource("3_4rwn6")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="DayNigthCicle"]
+environment = SubResource("Environment_03tnw")
+
+[node name="Sun" type="DirectionalLight3D" parent="DayNigthCicle"]
+shadow_enabled = true
+
+[node name="Moon" type="DirectionalLight3D" parent="DayNigthCicle"]
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0)
+visible = false
+shadow_enabled = true
+sky_mode = 1
