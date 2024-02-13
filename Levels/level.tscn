@@ -1,25 +1,55 @@
-[gd_scene load_steps=10 format=3 uid="uid://er2pby0vu5bj"]
+[gd_scene load_steps=19 format=3 uid="uid://er2pby0vu5bj"]
 
 [ext_resource type="PackedScene" uid="uid://dno7402fckmxy" path="res://Characters/player.tscn" id="1_eoneh"]
-[ext_resource type="Texture2D" uid="uid://5ubfjn37uri" path="res://icon.svg" id="1_riku4"]
+[ext_resource type="Texture2D" uid="uid://bmfi4lxev14cm" path="res://Art/grass.png" id="1_q1kmx"]
 [ext_resource type="Script" path="res://Scripts/DayNigthCicle.gd" id="3_4rwn6"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gjnoo"]
-albedo_color = Color(0.290196, 0.835294, 0.403922, 1)
-albedo_texture = ExtResource("1_riku4")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jirn0"]
+albedo_texture = ExtResource("1_q1kmx")
+uv1_scale = Vector3(20, 20, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yiqp8"]
 uv1_triplanar = true
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_20ykp"]
-material = SubResource("StandardMaterial3D_gjnoo")
+[sub_resource type="PlaneMesh" id="PlaneMesh_pxccu"]
+material = SubResource("StandardMaterial3D_yiqp8")
 size = Vector2(10, 10)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_oqtgs"]
 data = PackedVector3Array(5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, 5, -5, 0, -5, 5, 0, -5)
 
+[sub_resource type="Curve" id="Curve_kebmj"]
+_data = [Vector2(0.2, 0), 0.0, 0.0, 0, 0, Vector2(0.305668, 0.494505), 0.0, 0.0, 0, 0, Vector2(0.712551, 0.494505), 0.0, 0.0, 0, 0, Vector2(0.8, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_hdnhk"]
+offsets = PackedFloat32Array(0, 0.3, 0.7, 1)
+colors = PackedColorArray(1, 0.458824, 0.321569, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.482353, 0.352941, 1)
+
+[sub_resource type="Curve" id="Curve_pt5mh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.2, 0), 0.0, 0.0, 0, 0, Vector2(0.8, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_qcbxn"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.124276, 1.32841e-05, 0.518501, 1)
+
+[sub_resource type="Gradient" id="Gradient_h6gex"]
+offsets = PackedFloat32Array(0.1, 0.334764, 0.474249, 0.635193, 0.9)
+colors = PackedColorArray(0, 0.0666667, 0.470588, 1, 0.361388, 0.431743, 0.544341, 1, 0.565741, 0.635644, 0.738798, 1, 0.384314, 0.454902, 0.54902, 1, 0, 0.0666667, 0.470588, 1)
+
+[sub_resource type="Gradient" id="Gradient_vhxk3"]
+offsets = PackedFloat32Array(0.190987, 0.257511, 0.43133, 0.484979, 0.542918, 0.738197, 0.793991)
+colors = PackedColorArray(0, 0.0666667, 0.470588, 1, 0.933333, 0.513726, 0.294118, 1, 0.528583, 0.745184, 0.999995, 1, 0.775764, 0.876175, 0.996978, 1, 0.512635, 0.72787, 0.983053, 1, 0.933333, 0.513726, 0.294118, 1, 0, 0.0666667, 0.470588, 1)
+
+[sub_resource type="Gradient" id="Gradient_fkoym"]
+offsets = PackedFloat32Array(0.154812, 0.359833, 0.491632, 0.638075, 0.845188)
+colors = PackedColorArray(0, 0.156649, 0.16786, 1, 0.175132, 0.465358, 0.2513, 1, 0.25038, 0.650479, 0.359525, 1, 0.169112, 0.454746, 0.248432, 1, 0, 0.156649, 0.16786, 1)
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ng3ni"]
 sky_top_color = Color(0.211765, 0.513726, 0.913725, 1)
 sky_horizon_color = Color(0.588235, 0.858824, 0.976471, 1)
-ground_bottom_color = Color(0.211765, 0.513726, 0.913725, 1)
+ground_bottom_color = Color(0.223529, 0.454902, 0.301961, 1)
 ground_horizon_color = Color(0.588235, 0.858824, 0.976471, 1)
 
 [sub_resource type="Sky" id="Sky_pvydb"]
@@ -31,10 +61,14 @@ sky = SubResource("Sky_pvydb")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="BoxMesh" id="BoxMesh_tvtbw"]
+size = Vector3(1, 7.165, 1)
+
 [node name="Level" type="Node3D"]
 
 [node name="Plane" type="MeshInstance3D" parent="."]
-mesh = SubResource("PlaneMesh_20ykp")
+material_override = SubResource("StandardMaterial3D_jirn0")
+mesh = SubResource("PlaneMesh_pxccu")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Plane"]
 
@@ -49,6 +83,13 @@ transform = Transform3D(1, 0, 0, 0, 0.973964, 0.226702, 0, -0.226702, 0.973964, 
 
 [node name="DayNigthCicle" type="Node3D" parent="."]
 script = ExtResource("3_4rwn6")
+sun_intensity = SubResource("Curve_kebmj")
+sun_color = SubResource("Gradient_hdnhk")
+moon_intensity = SubResource("Curve_pt5mh")
+moon_color = SubResource("Gradient_qcbxn")
+sky_top_color = SubResource("Gradient_h6gex")
+sky_horizon_color = SubResource("Gradient_vhxk3")
+ground_color = SubResource("Gradient_fkoym")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="DayNigthCicle"]
 environment = SubResource("Environment_03tnw")
@@ -57,7 +98,9 @@ environment = SubResource("Environment_03tnw")
 shadow_enabled = true
 
 [node name="Moon" type="DirectionalLight3D" parent="DayNigthCicle"]
-transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0)
-visible = false
 shadow_enabled = true
 sky_mode = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999708, -0.024153, 0, 0.024153, 0.999708, 0, -1.10839, -2.6348)
+mesh = SubResource("BoxMesh_tvtbw")

@@ -25,8 +25,8 @@ func _process(delta):
 		if clock.x == 24:
 			clock.x = 0
 		
-		if clock.x == 3:
-			end_day()
+	if clock.x == 3:
+		end_day()
 		
 	day_time = clock.x / 24
 	clock_time = "%02d:%02d" % [clock.x, clock.y]
