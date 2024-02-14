@@ -1,15 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://er2pby0vu5bj"]
+[gd_scene load_steps=18 format=3 uid="uid://er2pby0vu5bj"]
 
 [ext_resource type="PackedScene" uid="uid://dno7402fckmxy" path="res://Characters/player.tscn" id="1_eoneh"]
 [ext_resource type="Texture2D" uid="uid://bmfi4lxev14cm" path="res://Art/grass.png" id="1_q1kmx"]
 [ext_resource type="Script" path="res://Scripts/DayNigthCicle.gd" id="3_4rwn6"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jirn0"]
-albedo_texture = ExtResource("1_q1kmx")
-uv1_scale = Vector3(20, 20, 20)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yiqp8"]
+albedo_texture = ExtResource("1_q1kmx")
 uv1_triplanar = true
+texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_pxccu"]
 material = SubResource("StandardMaterial3D_yiqp8")
@@ -67,7 +65,6 @@ size = Vector3(1, 7.165, 1)
 [node name="Level" type="Node3D"]
 
 [node name="Plane" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_jirn0")
 mesh = SubResource("PlaneMesh_pxccu")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Plane"]
