@@ -5,7 +5,7 @@ class_name DayCicleScript
 var clock_run : bool = false
 var clock : Vector4 = Vector4(0,0,0,0)
 var clock_time : String
-var ten_minute_lenght : float = 0.2
+var ten_minute_lenght : float = 0.1
 
 var timer : float = 0.0
 
@@ -23,11 +23,13 @@ func _ready():
 	
 func _process(delta):
 	clock_logic()
-	if clock.x == 18:
-		end_day()
+	#if clock.x == 18:
+		#end_day()
 	clock_time = "%02d:%02d" % [clock.x, clock.y]
 
 func clock_logic():
+	if Input.is_action_just_pressed("enter"):
+		clock_run = !clock_run
 	if clock_run:
 		clock.z += get_process_delta_time()
 		if clock.z >= ten_minute_lenght:
@@ -40,7 +42,11 @@ func clock_logic():
 			clock.x = 0
 		
 		day_time += get_process_delta_time() * day_ratio
-		
+		if day_time >= 1.0:
+			day_time = 0.0
+	else:
+		day_time = (1.0 / 24) * clock.x
+	
 func end_day():
 	clock_run = false
 	timer += get_process_delta_time()
