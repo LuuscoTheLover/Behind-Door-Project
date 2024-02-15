@@ -52,4 +52,5 @@ func start_day():
 	clock = Vector4(9, 0, 0, clock.w)
 	clock.w += 1
 	day_time = start_time
+	DayManager.current_day = clock.w
 	clock_run = true
